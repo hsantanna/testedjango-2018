@@ -1,3 +1,7 @@
 {
-    "python.pythonPath" : "~/prog4/testedjango20/bin/python"
+    "python.pythonPath": "~/prog4/testedjango20/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pep8Enabled": false,
+    "python.linting.pylintEnabled": false
 }
