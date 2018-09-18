@@ -14,7 +14,7 @@ class URLManager(models.Manager):
         return consulta
 
     # não precisa dos args pq não sobrepõe nada:
-    def atualizar_shortcodes(self):  
+    def atualizar_shortcodes(self):
         consulta = URL.objects.filter(id__gte=1)
         # gte: "greater to" e "equal" ( >= )
         novos_codigos = 0
@@ -39,7 +39,7 @@ class URL(models.Model):
         # testa se o shortcode é nulo ou está em branco
         # mesmo que: if self.shortcode in (None,""):
         if self.shortcode is None or self.shortcode == "":
-            self.shorcode = gerador_codigo()
+            self.shortcode = gerador_codigo()
         super(URL, self).save(*args, **kwargs)
 
     # método que retorna string com identificação do objeto
