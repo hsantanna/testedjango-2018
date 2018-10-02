@@ -14,8 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+
+from encurtador.views import url_redirect_view, UrlCBView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path(r'^new-admin/', admin.site.urls),
+    re_path(r'^view-1/$', url_redirect_view),
+    re_path(r'^view-2/$', UrlCBView.as_view()),
 ]

@@ -34,12 +34,13 @@ class URL(models.Model):
                                  default="codigopadrao",)
     atualizado = models.DateTimeField(auto_now=True)
     criado = models.DateTimeField(auto_now_add=True)
+    ativo = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         # testa se o shortcode é nulo ou está em branco
         # mesmo que: if self.shortcode in (None,""):
         if self.shortcode is None or self.shortcode == "":
-            self.shortcode = gerador_codigo()
+            self.shortcode = criar_shortcode(self)
         super(URL, self).save(*args, **kwargs)
 
     # método que retorna string com identificação do objeto
