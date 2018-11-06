@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from encurtador.views import url_redirect_view, UrlCBView
+from encurtador.views import url_redirect_view, UrlCBView, ano_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^new-admin/', admin.site.urls),
     re_path(r'^view-1/$', url_redirect_view),
     re_path(r'^view-2/$', UrlCBView.as_view()),
+    path('artigos/<int:ano>/', ano_view),
+    path('<shortcode>/', url_redirect_view),
 ]
