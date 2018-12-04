@@ -1,5 +1,7 @@
 from django.db import models
-from .utils import gerador_codigo, criar_shortcode
+
+from .validators import validar_url, validar_ponto_com
+from .utils import criar_shortcode
 
 
 # Create your models here.
@@ -14,7 +16,8 @@ class URLManager(models.Manager):
         return consulta
 
     # não precisa dos args pq não sobrepõe nada:
-    def atualizar_shortcodes(self):
+    @staticmethod
+    def atualizar_shortcodes():
         consulta = URL.objects.filter(id__gte=1)
         # gte: "greater to" e "equal" ( >= )
         novos_codigos = 0
@@ -28,7 +31,7 @@ class URLManager(models.Manager):
 
 class URL(models.Model):
     # cria campo url, do tipo CharField, tamanho máximo 220:
-    url = models.CharField(max_length=220)
+    url = models.CharField(max_length=220, validators=[validar_url, validar_ponto_com])
     shortcode = models.CharField(max_length=15, null=True,
                                  blank=True, unique=True,
                                  default="codigopadrao",)

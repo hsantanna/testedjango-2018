@@ -50,10 +50,10 @@ class HomeView(View):
     def post(self, request, *args, **kwargs):
         form = SubmitUrlForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            # form.cleaned_data é um dicionário retornado com os dados do POST
+            print(form.cleaned_data.get("url"))
         context = {
             "title": "Prog4",
             "form": form
         }
         return render(request, "home.html", context)
-
