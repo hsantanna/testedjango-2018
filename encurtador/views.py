@@ -1,9 +1,13 @@
-from django.shortcuts import render,get_object_or_404
+
 
 # Create your views here.
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
+
+from django.shortcuts import render, get_object_or_404
+
+from .forms import SubmitUrlForm
 from .models import URL
 
 # Create your views here.
@@ -30,3 +34,26 @@ def ano_view(request, ano, *args, **kwargs):
         </body>
     </html>"""
     return HttpResponse(pagina)
+
+
+class HomeView(View):
+
+    def get(self, request, *args, **kwargs):
+
+        meu_form = SubmitUrlForm()
+        context = {
+            "title": "Prog4",
+            "form": meu_form
+        }
+        return render(request, "home.html", context)
+
+    def post(self, request, *args, **kwargs):
+        form = SubmitUrlForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+        context = {
+            "title": "Prog4",
+            "form": form
+        }
+        return render(request, "home.html", context)
+

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from encurtador.views import url_redirect_view, UrlCBView, ano_view
+from encurtador.views import url_redirect_view, UrlCBView, ano_view, HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     re_path(r'^view-2/$', UrlCBView.as_view()),
     path('artigos/<int:ano>/', ano_view),
     path('<shortcode>/', url_redirect_view),
+    path('', HomeView.as_view()),
 ]
