@@ -5,7 +5,7 @@ import string
 def criar_shortcode(instance, tamanho=6):
     novo_codigo = gerador_codigo(tamanho)
     Classe = instance.__class__
-    consulta_existe = Classe.objects().filter(shortcode=novo_codigo).exists()
+    consulta_existe = Classe.objects.filter(shortcode=novo_codigo).exists()
     if consulta_existe:
         return criar_shortcode(tamanho=tamanho)
     return novo_codigo

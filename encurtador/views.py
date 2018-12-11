@@ -49,11 +49,26 @@ class HomeView(View):
 
     def post(self, request, *args, **kwargs):
         form = SubmitUrlForm(request.POST)
-        if form.is_valid():
-            # form.cleaned_data é um dicionário retornado com os dados do POST
-            print(form.cleaned_data.get("url"))
         context = {
             "title": "Prog4",
             "form": form
         }
-        return render(request, "home.html", context)
+        template = "home.html"
+        if form.is_valid():
+            # form.cleaned_data é um dicionário retornado com os dados do POST
+            nova_url = form.cleaned_data.get("url")
+
+            # get_or_create: retorna objeto já existente no banco, ou criando-o.
+            obj, criada = URL.objects.get_or_create(
+                # cada campo deve ser informado com seu respectivo valor a ser cadastrado no banco
+                url=nova_url)
+            context = {
+                "object": obj,
+                "criada": criada,
+            }
+            if criada:
+                template = "sucesso.html"
+            else:
+                template = "ja-existe.html"
+
+        return render(request, template, context)

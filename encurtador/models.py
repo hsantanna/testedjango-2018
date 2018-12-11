@@ -34,7 +34,8 @@ class URL(models.Model):
     url = models.CharField(max_length=220, validators=[validar_url, validar_ponto_com])
     shortcode = models.CharField(max_length=15, null=True,
                                  blank=True, unique=True,
-                                 default="codigopadrao",)
+                                 #default="codigopadrao",
+                                 )
     atualizado = models.DateTimeField(auto_now=True)
     criado = models.DateTimeField(auto_now_add=True)
     ativo = models.BooleanField(default=True)
